@@ -7,6 +7,7 @@ namespace T9Converter.Tests
     {
         [Theory]
         [InlineData("yes", "999337777")]
+        [InlineData("foo  bar", "333666 6660 022 2777")]
         public void Convert_ToT9String_CompareResult(string text, string t9codes)
         {
             var converter = GetConverter();

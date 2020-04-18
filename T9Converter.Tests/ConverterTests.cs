@@ -18,7 +18,7 @@ namespace T9Converter.Tests
 
         private Converter GetConverter()
         {
-            return new Converter();
+            return new Converter(Keyboards.Default);
         }
     }
 }

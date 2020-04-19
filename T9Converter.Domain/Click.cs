@@ -2,12 +2,12 @@
 {
     internal class Click
     {
-        public int Key { get; }
+        public int ButtonNumber { get; }
         public int Count { get; }
 
-        public Click(int key, int count)
+        public Click(int number, int count)
         {
-            Key = key;
+            ButtonNumber = number;
             Count = count;
         }
     }

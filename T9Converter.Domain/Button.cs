@@ -2,13 +2,13 @@
 {
     public class Button
     {
-        public int Key { get; }
-        public char[] Values { get; }
+        public int Number { get; }
+        public char[] Symbols { get; }
 
-        public Button(int key, params char[] values)
+        public Button(int number, params char[] symbols)
         {
-            Key = key;
-            Values = values;
+            Number = number;
+            Symbols = symbols;
         }
     }
 }

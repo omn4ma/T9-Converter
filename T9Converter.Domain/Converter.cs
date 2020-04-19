@@ -19,6 +19,11 @@ namespace T9Converter.Domain
 
         public string ToT9Codes(string text)
         {
+            if (String.IsNullOrEmpty(text))
+            {
+                return String.Empty;
+            }
+
             var result = new StringBuilder();
             int? lastButtonNumber = null;
 

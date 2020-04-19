@@ -6,6 +6,8 @@ namespace T9Converter.Tests
     public class ConverterTests
     {
         [Theory]
+        [InlineData(null, "")]
+        [InlineData("", "")]
         [InlineData("4", "")]
         [InlineData("hi", "44 444")]
         [InlineData("yes", "999337777")]

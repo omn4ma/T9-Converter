@@ -13,7 +13,7 @@ namespace T9Converter.Application
             int count = 0;
             var converter = new Converter(Keyboards.Default);
 
-            Console.WriteLine($"Please enter text to convert it into a sequence of button presses for T9 spelling (or empty string to exit):");
+            Console.WriteLine($"Please enter text to convert it into a sequence of button presses for T9 spelling:");
 
             using (var subsctiption = ConsoleInput()
                 .Subscribe(s => Console.WriteLine($"Case #{count++}: {converter.ToT9Codes(s)}")))

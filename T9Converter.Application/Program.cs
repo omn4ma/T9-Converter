@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
+using System.Threading;
 using T9Converter.Domain;
 
 namespace T9Converter.Application
@@ -7,26 +10,29 @@ namespace T9Converter.Application
     {
         static void Main(string[] args)
         {
-            String text;
             int count = 0;
             var converter = new Converter(Keyboards.Default);
 
             Console.WriteLine($"Please enter text to convert it into a sequence of button presses for T9 spelling (or empty string to exit):");
 
-            do
+            using (var subsctiption = ConsoleInput()
+                .Subscribe(s => Console.WriteLine($"Case #{count++}: {converter.ToT9Codes(s)}")))
             {
-                text = Console.ReadLine();
-                var t9codes = converter.ToT9Codes(text);
+                Thread.Sleep(TimeSpan.FromSeconds(30));
+            }
 
-                if (!String.IsNullOrEmpty(t9codes))
-                {
-                    count++;
-                    Console.WriteLine($"Case #{count}: {t9codes}");
-                }
+            Console.WriteLine($"Time is up, the application will be closed.");
+            Console.ReadLine();
+        }
 
-            } while (text != String.Empty);
-
-            Console.WriteLine($"Closing");
+        private static IObservable<string> ConsoleInput()
+        {
+            return
+                Observable
+                    .FromAsync(() => Console.In.ReadLineAsync())
+                    .Repeat()
+                    .Publish()
+                    .SubscribeOn(Scheduler.Default);
         }
     }
 }
